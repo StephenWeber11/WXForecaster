@@ -4,9 +4,17 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>Controllers.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <sevlet-name>ForecastController</sevlet-name>
+        <servlet-class>Controllers.ForecastController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForecastController</servlet-name>
+        <url-pattern>/forecast</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
