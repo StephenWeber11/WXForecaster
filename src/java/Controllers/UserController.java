@@ -7,8 +7,12 @@ package Controllers;
 
 import Beans.User;
 import DB.UserDB;
+import Util.PasswordUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +77,13 @@ public class UserController extends HttpServlet {
             user.setLastName(lastName);
             user.setEmail(email);
             user.setRole("user");
+            
+            //Hash and salt password
+            try{
+                password = PasswordUtil.hashAndSaltPassword(password);
+            }catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             user.setPassword(password);
             
             if(UserDB.emailExists(email)){

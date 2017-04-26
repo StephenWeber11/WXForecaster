@@ -14,15 +14,25 @@ import java.util.Date;
  */
 public class Forecast implements Serializable{
     
+    private int forecastID;
     private int highTemp;
     private int lowTemp;
     private int windSpeed;
     private String skyConditions;
     private double precip;
     private Date dateSubmitted;
+    private String email;
     
     public Forecast(){
         
+    }
+    
+    public void setForecastID(int forecastID){
+        this.forecastID = forecastID;
+    }
+    
+    public int getForecastID(){
+        return forecastID;
     }
     
     public void setHighTemp(int highTemp){
@@ -71,6 +81,14 @@ public class Forecast implements Serializable{
     
     public Date getDateSubmitted(){
         return dateSubmitted;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
+    }
+    
+    public String getEmail(){
+        return email;
     }
     
 }
