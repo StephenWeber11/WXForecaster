@@ -45,20 +45,33 @@ public class UserController extends HttpServlet {
         //Handle Login
         if(action.equals("login")){
             String email = request.getParameter("email");
+            String password = request.getParameter("password");
             user = UserDB.getUser(email);
+            String hashedAndSaltedPassword = user.getPassword();
+            String salt = user.getSalt();
+            
+            //Check password
+            try {
+                password = PasswordUtil.hashPassword(password) + salt;
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             String msg = "";
             if(!UserDB.emailExists(email)){
                 msg = "Sorry but this user does not exist. <br/>" + 
                         "Please try another email address.";
                 url = "/login.jsp";
             }else{
-                if(user.getRole().equals("user")){
-                    session.setAttribute("theUser",user);
-                    url = "/main.jsp";
-                }
-                if(user.getRole().equals("admin")){
-                    session.setAttribute("theAdmin",user);
-                    url = "/admin.jsp";
+                if(hashedAndSaltedPassword.equals(password)){
+                    if(user.getRole().equals("user")){
+                        session.setAttribute("theUser",user);
+                        url = "/main.jsp";
+                    }
+                    if(user.getRole().equals("admin")){
+                        session.setAttribute("theAdmin",user);
+                        url = "/admin.jsp";
+                    }
                 }
             }
         }
@@ -101,11 +114,9 @@ public class UserController extends HttpServlet {
                 saltedAndHashedPassword = ex.getMessage();
             }
             
+            user.setSalt(salt);
+            user.setHash(hashedPassword);
             user.setPassword(saltedAndHashedPassword);
-            
-            request.setAttribute("hashedPassword", hashedPassword);
-            request.setAttribute("salt", salt);
-            request.setAttribute("saltedAndHashedPassword", saltedAndHashedPassword);
             
             if(UserDB.emailExists(email)){
                 msg = "Sorry, the email you entered already exists. <br/>" +
