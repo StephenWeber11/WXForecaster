@@ -2,20 +2,13 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="WxForecasterPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <non-jta-data-source>WxForecaster</non-jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <validation-mode>NONE</validation-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://wxforecaster.c51wgpri4qzy.us-east-1.rds.amazonaws.com:3306/WxForecaster"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://wxforecaster.c51wgpri4qzy.us-east-1.rds.amazonaws.com:3306/mysql?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="Weather"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="frontogenesis"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
-      <property name="eclipselink.jdbc.read-connections.max" value="500"/>
-      <property name="eclipselink.jdbc.write-connections.max" value="500"/>
-      <property name="eclipselink.connection-pool.default.initial" value="1"/>
-      <property name="eclipselink.connection-pool.default.min" value="64"/>
-      <property name="eclipselink.connection-pool.default.max" value="64"/>
     </properties>
   </persistence-unit>
 </persistence>
