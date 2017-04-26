@@ -59,26 +59,4 @@ public class PasswordUtil {
         }
         return true;
     }
-    
-    /*  This code tests the functionality of this class.
-    */    
-    public static void main(String[] args) {
-        try {
-            System.out.println("Hash for 'sesame':\n"
-                    + hashPassword("sesame"));
-            System.out.println("Random salt:\n"
-                    + getSalt());
-            System.out.println("Salted hash for 'sesame':\n"
-                    + hashAndSaltPassword("sesame"));            
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println(ex);
-        }
-        
-        try {
-            checkPasswordStrength("sesame1776");
-            System.out.println("Password is valid.");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }        
-    }
 }
