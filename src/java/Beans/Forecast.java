@@ -6,6 +6,7 @@
 package Beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Forecast implements Serializable{
     private int windSpeed;
     private String skyConditions;
     private double precip;
+    private Date dateSubmitted;
     
     public Forecast(){
         
@@ -61,6 +63,14 @@ public class Forecast implements Serializable{
     
     public double getPrecip(){
         return precip;
+    }
+    
+    public void setDateSubmitted(Date dateSubmitted){
+        this.dateSubmitted = dateSubmitted;
+    }
+    
+    public Date getDateSubmitted(){
+        return dateSubmitted;
     }
     
 }

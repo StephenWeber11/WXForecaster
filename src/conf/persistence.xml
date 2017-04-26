@@ -4,11 +4,16 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
-      <property name="javax.persistence.jdbc.user" value="app"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql: wxforecaster.c51wgpri4qzy.us-east-1.rds.amazonaws.com:3306/WXFORECASTER"/>
+      <property name="javax.persistence.jdbc.user" value="Weather"/>
+      <property name="javax.persistence.jdbc.password" value="frontogenesis"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="app"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.jdbc.read-connections.max" value="500"/>
+      <property name="eclipselink.jdbc.write-connections.max" value="500"/>
+      <property name="eclipselink.connection-pool.default.initial" value="1"/>
+      <property name="eclipselink.connection-pool.default.min" value="64"/>
+      <property name="eclipselink.connection-pool.default.max" value="64"/>
     </properties>
   </persistence-unit>
 </persistence>
