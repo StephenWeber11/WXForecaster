@@ -78,13 +78,34 @@ public class UserController extends HttpServlet {
             user.setEmail(email);
             user.setRole("user");
             
-            //Hash and salt password
-            try{
-                password = PasswordUtil.hashAndSaltPassword(password);
-            }catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            String message;
+            try {
+                PasswordUtil.checkPasswordStrength(password);
+                message = "";
+            } catch (Exception e) {
+                message = e.getMessage();
             }
-            user.setPassword(password);
+            request.setAttribute("message", message);  
+            
+            //Hash and salt password from Chapter 17 example
+            String hashedPassword;
+            String salt = "";
+            String saltedAndHashedPassword;
+            try {
+                hashedPassword = PasswordUtil.hashPassword(password);
+                salt = PasswordUtil.getSalt();
+                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
+
+            } catch (NoSuchAlgorithmException ex) {
+                hashedPassword = ex.getMessage();
+                saltedAndHashedPassword = ex.getMessage();
+            }
+            
+            user.setPassword(saltedAndHashedPassword);
+            
+            request.setAttribute("hashedPassword", hashedPassword);
+            request.setAttribute("salt", salt);
+            request.setAttribute("saltedAndHashedPassword", saltedAndHashedPassword);
             
             if(UserDB.emailExists(email)){
                 msg = "Sorry, the email you entered already exists. <br/>" +
