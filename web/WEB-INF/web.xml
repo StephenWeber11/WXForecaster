@@ -5,7 +5,7 @@
         <servlet-class>Controllers.UserController</servlet-class>
     </servlet>
     <servlet>
-        <sevlet-name>ForecastController</sevlet-name>
+        <servlet-name>ForecastController</servlet-name>
         <servlet-class>Controllers.ForecastController</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -21,4 +21,7 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
