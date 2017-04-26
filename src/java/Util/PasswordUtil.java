@@ -1,3 +1,9 @@
+/*
+
+    This is code from Chapter 17 of the textbook
+
+*/
+
 package Util;
 
 import java.security.MessageDigest;

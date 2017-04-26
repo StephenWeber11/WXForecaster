@@ -3,15 +3,20 @@
     Created on : Apr 25, 2017, 7:02:28 PM
     Author     : Stephen
 --%>
+<%@include file="header.jsp"%>
+<div id="login_form">
+    <p><i>${msg}</i></p>
+    <form action="userController" method="post">
+        <input type="hidden" name="action" value="login">
+        <label >Email Address *</label>
+        <input type="email" name="email" required/> <br><br>
+        <label >Password *</label>
+        <input type="password" name="password" required/><br>
+        <label>&nbsp;</label>
+        <input type="submit" value="Log in" id="login_button">
+        <br>
+    </form>
+    <a href="signup.jsp" id="sign_up_link">Sign up for a new account</a>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+</div>
+<%@include file="footer.jsp" %>

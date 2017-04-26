@@ -4,7 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql: wxforecaster.c51wgpri4qzy.us-east-1.rds.amazonaws.com:3306/WXFORECASTER"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql:wxforecaster.c51wgpri4qzy.us-east-1.rds.amazonaws.com:3306/WXFORECASTER"/>
       <property name="javax.persistence.jdbc.user" value="Weather"/>
       <property name="javax.persistence.jdbc.password" value="frontogenesis"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
