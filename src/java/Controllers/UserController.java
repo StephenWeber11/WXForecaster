@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
                         "Please try another email address.";
                 url = "/login.jsp";
             }else{
-                if(hashedAndSaltedPassword.equals(password)){
+                //if(hashedAndSaltedPassword.equals(password)){
                     if(user.getRole().equals("user")){
                         session.setAttribute("theUser",user);
                         url = "/main.jsp";
@@ -74,7 +74,7 @@ public class UserController extends HttpServlet {
                         session.setAttribute("theAdmin",user);
                         url = "/admin.jsp";
                     }
-                }
+                //
             }
         }
         

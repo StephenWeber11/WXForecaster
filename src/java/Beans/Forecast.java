@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,6 +30,7 @@ public class Forecast implements Serializable{
     private int windSpeed;
     private String skyConditions;
     private double precip;
+    @Temporal( TemporalType.DATE )
     private Date dateSubmitted;
     
     public Forecast(){

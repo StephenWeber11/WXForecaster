@@ -11,8 +11,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import Beans.User;
 import java.util.List;
-//import Data.DBUtil;
-
+import DB.DBUtil;
 /**
  *
  * @author Stephen Weber
