@@ -6,7 +6,7 @@
 <%@include file="header.jsp"%>
 <div id="login_form">
     <p><i>${msg}</i></p>
-    <form action="userController" method="post">
+    <form action="user" method="post">
         <input type="hidden" name="action" value="login">
         <label >Email Address *</label>
         <input type="email" name="email" required/> <br><br>
