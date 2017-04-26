@@ -50,7 +50,7 @@ public class UserController extends HttpServlet {
             }else{
                 if(user.getRole().equals("user")){
                     session.setAttribute("theUser",user);
-                    url = "/home.jsp";
+                    url = "/main.jsp";
                 }
                 if(user.getRole().equals("admin")){
                     session.setAttribute("theAdmin",user);
@@ -87,7 +87,19 @@ public class UserController extends HttpServlet {
             }
         }
         
+        if(action.equals("learn")){
+            url = "/forecasting101.jsp";
+            if(user != null){
+                url="/main.jsp";
+            }
+        }
         
+        if(action.equals("forecast")){
+            url = "/forecast.jsp";
+            if(user != null){
+                url="/home.jsp";
+            }
+        }
         
         
     getServletContext()
