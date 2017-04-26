@@ -7,12 +7,20 @@ package Beans;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Stephen
  */
+@Entity
 public class Forecast implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String forecasterEmail;
     
     private int forecastID;
     private int highTemp;
@@ -21,7 +29,6 @@ public class Forecast implements Serializable{
     private String skyConditions;
     private double precip;
     private Date dateSubmitted;
-    private String email;
     
     public Forecast(){
         
@@ -83,12 +90,12 @@ public class Forecast implements Serializable{
         return dateSubmitted;
     }
     
-    public void setEmail(String email){
-        this.email = email;
+    public void setForecasterEmail(String forecasterEmail){
+        this.forecasterEmail = forecasterEmail;
     }
     
-    public String getEmail(){
-        return email;
+    public String getForecasterEmail(){
+        return forecasterEmail;
     }
     
 }

@@ -15,11 +15,15 @@ import javax.persistence.Id;
  *
  * @author Stephen
  */
+@Entity
 public class User implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String email;
     
     private String firstName;
     private String lastName;
-    private String email;
     private String password;
     private String role;
     private String hash;
@@ -29,8 +33,6 @@ public class User implements Serializable {
         
     }
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public void setFirstName(String firstName){
         this.firstName = firstName;
     }
