@@ -94,31 +94,31 @@ public class UserController extends HttpServlet {
             user.setRole("user");
             
             String message;
-            try {
-                PasswordUtil.checkPasswordStrength(password);
-                message = "";
-            } catch (Exception e) {
-                message = e.getMessage();
-            }
-            request.setAttribute("message", message);  
+//            try {
+//                PasswordUtil.checkPasswordStrength(password);
+//                message = "";
+//            } catch (Exception e) {
+//                message = e.getMessage();
+//            }
+//            request.setAttribute("message", message);  
             
             //Hash and salt password from Chapter 17 example
             String hashedPassword;
             String salt = "";
             String saltedAndHashedPassword;
-            try {
-                hashedPassword = PasswordUtil.hashPassword(password);
-                salt = PasswordUtil.getSalt();
-                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
-
-            } catch (NoSuchAlgorithmException ex) {
-                hashedPassword = ex.getMessage();
-                saltedAndHashedPassword = ex.getMessage();
-            }
+//            try {
+//                hashedPassword = PasswordUtil.hashPassword(password);
+//                salt = PasswordUtil.getSalt();
+//                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
+//
+//            } catch (NoSuchAlgorithmException ex) {
+//                hashedPassword = ex.getMessage();
+//                saltedAndHashedPassword = ex.getMessage();
+//            }
             
-            user.setSalt(salt);
-            user.setHash(hashedPassword);
-            user.setPassword(saltedAndHashedPassword);
+//            user.setSalt(salt);
+//            user.setHash(hashedPassword);
+//            user.setPassword(saltedAndHashedPassword);
             
             if(UserDB.emailExists(email)){
                 msg = "Sorry, the email you entered already exists. <br/>" +

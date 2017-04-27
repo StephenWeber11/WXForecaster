@@ -4,14 +4,14 @@
     Author     : Stephen
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@include file="/header.jsp"%>
+<div id="signUpForm">
+    <form action="user" method="post">
+        <input type="hidden" name="action" value="create"/>
+        <input type="text" name="First Name" value="firstName"/>
+        <input type="text" name="Last Name" value="lastName"/>
+        <input type="email" name="Email" value="email"/>
+        <input type="password" name="Password" value="password"/>
+        <input type="submit" value="Create Account"/>
+    </form>
+</div>
