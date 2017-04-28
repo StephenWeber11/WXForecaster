@@ -37,6 +37,10 @@ public class ForecastController extends HttpServlet {
             url = "/home.jsp";
         }
         
+        if(action.equals("add")){
+            
+        }
+        
         if(action.equals("email")){
             String highTemp = request.getParameter("highTemp");
             String lowTemp = request.getParameter("lowTemp");
