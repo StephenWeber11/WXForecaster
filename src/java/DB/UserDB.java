@@ -109,19 +109,25 @@ public class UserDB {
         User u = getUser(email);
         String password = u.getPassword();
         String salt = u.getSalt();
+        System.out.println("Salt " + salt);
         
-        String hashPass = "";
+        String newPass = "";
+        String hashedPass = "";
         try {
-            hashPass = PasswordUtil.hashPassword(userPass);
+            newPass = PasswordUtil.hashPassword(userPass + salt);
+            hashedPass = PasswordUtil.hashPassword(userPass);
+            System.out.println("UserPass " + userPass);
+            System.out.println("Hash " + hashedPass);
+            System.out.println("Hash + Salt " + newPass);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(password.equals(hashPass+salt)){
-            
+        if(password.equals(newPass)){
+            return true;
         }
         
-        return true;
+        return false;
     }
     
     

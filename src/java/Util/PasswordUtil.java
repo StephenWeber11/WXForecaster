@@ -45,7 +45,7 @@ public class PasswordUtil {
             throws NoSuchAlgorithmException {
         String salt = getSalt();
         return hashPassword(password + salt);
-    }
+    } 
     
     public static void checkPasswordStrength(String password) throws Exception {
         if (password == null || password.trim().isEmpty()) {

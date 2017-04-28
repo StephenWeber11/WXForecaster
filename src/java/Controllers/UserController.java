@@ -52,19 +52,13 @@ public class UserController extends HttpServlet {
             user = UserDB.getUser(email);
             String salt = user.getSalt();
             
-            //Check password
-            try {
-                password = PasswordUtil.hashPassword(password) + salt;
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
             String msg = "";
             if(!UserDB.emailExists(email)){
                 msg = "Sorry but this user does not exist. <br/>" + 
                         "Please try another email address.";
                 url = "/login.jsp";
             }else{
+                //Validate password.. Code in PasswordUtil
                 if(UserDB.passwordIsValid(email,password)){
                     if(user.getRole().equals("user")){
                         session.setAttribute("theUser",user);
@@ -109,21 +103,17 @@ public class UserController extends HttpServlet {
             request.setAttribute("message", message);  
             
             //Hash and salt password from Chapter 17 example
-            String hashedPassword;
             String salt = "";
             String saltedAndHashedPassword;
             try {
-                hashedPassword = PasswordUtil.hashPassword(password);
                 salt = PasswordUtil.getSalt();
-                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
+                saltedAndHashedPassword = PasswordUtil.hashPassword(password+salt);                    
 
             } catch (NoSuchAlgorithmException ex) {
-                hashedPassword = ex.getMessage();
                 saltedAndHashedPassword = ex.getMessage();
             }
             
             user.setSalt(salt);
-            user.setHash(hashedPassword);
             user.setPassword(saltedAndHashedPassword);
             
             if(UserDB.emailExists(email)){

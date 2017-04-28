@@ -10,3 +10,4 @@
         own forecasts and email them to their friends and family!</p>
     <p>Take a look around and enjoy your stay!</p>
 </div>
+<%@include file="/footer.jsp" %>

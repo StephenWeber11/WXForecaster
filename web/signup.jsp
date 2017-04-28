@@ -17,3 +17,4 @@
     <p>${message}</p>
     <p>${msg}</p>
 </div>
+<%@include file="/footer.jsp" %>
