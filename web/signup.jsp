@@ -14,4 +14,6 @@
         <input type="password" name="password" value="password"/>
         <input type="submit" value="Create Account"/>
     </form>
+    <p>${message}</p>
+    <p>${msg}</p>
 </div>

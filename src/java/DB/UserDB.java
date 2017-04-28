@@ -12,6 +12,10 @@ import javax.persistence.TypedQuery;
 import Beans.User;
 import java.util.List;
 import DB.DBUtil;
+import Util.PasswordUtil;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Stephen Weber
@@ -99,6 +103,25 @@ public class UserDB {
     public static boolean emailExists(String email) {
         User u = getUser(email);   
         return u != null;
+    }
+    
+    public static boolean passwordIsValid(String email,String userPass){
+        User u = getUser(email);
+        String password = u.getPassword();
+        String salt = u.getSalt();
+        
+        String hashPass = "";
+        try {
+            hashPass = PasswordUtil.hashPassword(userPass);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(password.equals(hashPass+salt)){
+            
+        }
+        
+        return true;
     }
     
     

@@ -35,6 +35,7 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
         String url = "/home.jsp";
         User user = new User();
+        User admin = new User();
         
         if(action == null){
             action = "join";
@@ -49,7 +50,6 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             user = UserDB.getUser(email);
-            String hashedAndSaltedPassword = user.getPassword();
             String salt = user.getSalt();
             
             //Check password
@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
                         "Please try another email address.";
                 url = "/login.jsp";
             }else{
-                //if(hashedAndSaltedPassword.equals(password)){
+                if(UserDB.passwordIsValid(email,password)){
                     if(user.getRole().equals("user")){
                         session.setAttribute("theUser",user);
                         url = "/main.jsp";
@@ -74,8 +74,13 @@ public class UserController extends HttpServlet {
                         session.setAttribute("theAdmin",user);
                         url = "/admin.jsp";
                     }
-                //
+                }else{
+                    msg="The password you entered is invalid, please try again!";
+                    url="/login.jsp";
+                    
+                }
             }
+            session.setAttribute("msg",msg);
         }
         
         //Handle account creation
@@ -92,34 +97,34 @@ public class UserController extends HttpServlet {
             user.setLastName(lastName);
             user.setEmail(email);
             user.setRole("user");
-            user.setPassword(password);
+            //user.setPassword(password);
             
             String message;
-//            try {
-//                PasswordUtil.checkPasswordStrength(password);
-//                message = "";
-//            } catch (Exception e) {
-//                message = e.getMessage();
-//            }
-//            request.setAttribute("message", message);  
+            try {
+                PasswordUtil.checkPasswordStrength(password);
+                message = "";
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            request.setAttribute("message", message);  
             
             //Hash and salt password from Chapter 17 example
             String hashedPassword;
             String salt = "";
             String saltedAndHashedPassword;
-//            try {
-//                hashedPassword = PasswordUtil.hashPassword(password);
-//                salt = PasswordUtil.getSalt();
-//                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
-//
-//            } catch (NoSuchAlgorithmException ex) {
-//                hashedPassword = ex.getMessage();
-//                saltedAndHashedPassword = ex.getMessage();
-//            }
+            try {
+                hashedPassword = PasswordUtil.hashPassword(password);
+                salt = PasswordUtil.getSalt();
+                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
+
+            } catch (NoSuchAlgorithmException ex) {
+                hashedPassword = ex.getMessage();
+                saltedAndHashedPassword = ex.getMessage();
+            }
             
-//            user.setSalt(salt);
-//            user.setHash(hashedPassword);
-//            user.setPassword(saltedAndHashedPassword);
+            user.setSalt(salt);
+            user.setHash(hashedPassword);
+            user.setPassword(saltedAndHashedPassword);
             
             if(UserDB.emailExists(email)){
                 msg = "Sorry, the email you entered already exists. <br/>" +
@@ -144,6 +149,15 @@ public class UserController extends HttpServlet {
             url = "/forecast.jsp";
             if(user != null){
                 url="/home.jsp";
+            }
+        }
+        
+        if(action.equals("logout")){
+            url = "/home.jsp";
+            if(user != null){
+                session.invalidate();
+                request.logout();
+                url = "/home.jsp";
             }
         }
         
