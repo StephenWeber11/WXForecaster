@@ -92,6 +92,7 @@ public class UserController extends HttpServlet {
             user.setLastName(lastName);
             user.setEmail(email);
             user.setRole("user");
+            user.setPassword(password);
             
             String message;
 //            try {

@@ -6,7 +6,7 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>WxForecaster</title>
-        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
     </head>
@@ -26,10 +26,10 @@
                 <ul class="right">
                     <c:choose>
                         <c:when test="${sessionScope.theUser != null}">
-                            <li>Hello, <span>${theUser.name}</span></li>
+                            <li>Hello, <span>${theUser.firstName}</span></li>
                         </c:when>
                         <c:when test="${sessionScope.theAdmin != null}">
-                        <li>Hello, <span>${theAdmin.name}</span></li>
+                        <li>Hello, <span>${theAdmin.firstName}</span></li>
                         </c:when>
                     </c:choose>
                     <li><a href="user?action=about">About Us</a></li>
@@ -43,7 +43,7 @@
                         </c:otherwise>
                     </c:choose>
                 </ul>
-
             </nav>
         </div>
+        <div class="grid-container">
 

@@ -3,15 +3,9 @@
     Created on : Apr 25, 2017, 7:03:09 PM
     Author     : Stephen
 --%>
+<%@include file="/header.jsp" %>
+<div>
+    <iframe src="http://weather.rap.ucar.edu/radar/displayRad.php?icao=KUSA&prod=bref1&bkgr=gray&endDate=20170428&endTime=-1&duration=6" width="1220px" height="1000px"></iframe>
+</div>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@include file="/footer.jsp" %>
