@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Beans.Forecast;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,7 +37,19 @@ public class ForecastController extends HttpServlet {
             url = "/home.jsp";
         }
         
-        
+        if(action.equals("email")){
+            String highTemp = request.getParameter("highTemp");
+            String lowTemp = request.getParameter("lowTemp");
+            String windSpd = request.getParameter("windSpd");
+            //TODO: Add rest of parameters!
+            
+            //Forecast forecast = ForecastDB.getForecast(email); 
+            //Sending email need to add more code above..
+            //String to = email;
+            //String from = email;
+            String subject = "Check out this Charlotte area forecast!!";
+            String boday = "Hi, ";
+        }
         
     getServletContext()
                 .getRequestDispatcher(url)
