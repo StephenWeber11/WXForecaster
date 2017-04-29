@@ -96,6 +96,46 @@ public class ForecastController extends HttpServlet {
 //                        }
 //                    }
 //                }
+                
+                //Send the admin (me) an email stating that a user has just added a new forecast..
+                String to = "stephen.weber3@gmail.com";
+                String from = user.getEmail();
+                String subject = "A user has submitted a new forecast";
+                String body 
+                        = "Hi, Stephen,<br/><br/>"+
+                            "A user has just submitted a new forecast, please login to approve! <br/><br/>" +
+                            "<strong>Forecast details:<strong> <br/><br/>" +
+                            "<table style='text-align: center;'>\n" +
+                            "<tr>\n" +
+                            "<th style='padding-right: 10px;'>High Temperature (F)</th>\n" +
+                            "<th style='padding-right: 10px;'>Low Temperature (F)</th>\n" +
+                            "<th style='padding-right: 10px;'>Wind Speed (MPH)</th>\n" +
+                            "<th style='padding-right: 10px;'>Sky Conditions</th>\n" +
+                            "<th style='padding-right: 10px;'>Precipitation (Inches)</th>\n" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                            "<td>"+ high +"</td>\n" +
+                            "<td>"+ low + "</td>\n" +
+                            "<td>"+ wnd + "</td>\n" +
+                            "<td>"+ sky +"</td>\n" +
+                            "<td>"+ precip + "</td>\n" +
+                            "</tr>\n" +
+                            "</table>" +
+                            "<br/><br/>" +
+                            "Thank you!" + "<br/><br/>" +
+                            "<span style='size:25px'>UNCC WxForecaster</span>";
+                        
+
+                boolean isBodyHTML = true;
+
+                try{
+                    MailUtil.sendMail(to, from, subject, body,isBodyHTML);
+                }catch(MessagingException e){
+                    String errorMessage
+                            = "Error: Unable to send email. "
+                            + "Check Tomcat logs for details. <br/> ";
+                    request.setAttribute("errorMessage",errorMessage);
+                }
 
                 url="/forecast.jsp";
                 

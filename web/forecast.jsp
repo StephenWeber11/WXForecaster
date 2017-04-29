@@ -6,6 +6,7 @@
 <%@include file="/header.jsp" %>
 <div>
     <p>${msg}</p>
+    <p>${errorMessage}</p>
     <form action="forecast" method="post">
         <input type="hidden" name="action" value="add">
         <label>High (F)</label>

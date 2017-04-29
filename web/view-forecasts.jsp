@@ -23,6 +23,11 @@
                 <td>${f.windSpeed}</td>
                 <td>${f.skyConditions}</td>
                 <td>${f.precip}</td>
+                
+                <form action="forecast" method="post">
+                    <input type="hidden" name="forecastID" value="${f.forecastID}"/>
+                    <input type="submit" name="action" value="SendEmail">Email A Friend</input>
+                </form>
             </tr>
         </c:forEach>
     </table>  
