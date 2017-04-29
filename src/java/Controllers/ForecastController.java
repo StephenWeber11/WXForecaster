@@ -144,6 +144,12 @@ public class ForecastController extends HttpServlet {
             
         }
         
+        if(action.equals("view-forecasts")){
+            List<Forecast> forecasts = ForecastDB.getForecasts();
+            request.setAttribute("approvedForecasts",forecasts);
+            url="/view-forecasts.jsp";
+        }
+        
         if(action.equals("email")){
             String highTemp = request.getParameter("highTemp");
             String lowTemp = request.getParameter("lowTemp");

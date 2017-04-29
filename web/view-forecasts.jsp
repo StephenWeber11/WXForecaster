@@ -16,7 +16,7 @@
             <th>Sky Conditions</th>
             <th>Precipitation (Inches)</th>
         </tr>
-        <c:forEach items="${submittedForecasts}" var="f">
+        <c:forEach items="${approvedForecasts}" var="f">
             <tr>
                 <td>${f.highTemp}</td>
                 <td>${f.lowTemp}</td>
@@ -26,7 +26,9 @@
                 
                 <form action="forecast" method="post">
                     <input type="hidden" name="forecastID" value="${f.forecastID}"/>
-                    <input type="submit" name="action" value="SendEmail">Email A Friend</input>
+                    <input type="button" value="Email A Friend" class="emailForecast">
+<!--                    <input type="email" name="toAddr" style="display: none !important;" required/>-->
+<!--                    <button type="submit" name="action" value="SendEmail"></button>-->
                 </form>
             </tr>
         </c:forEach>
