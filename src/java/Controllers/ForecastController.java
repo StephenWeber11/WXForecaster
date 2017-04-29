@@ -12,6 +12,7 @@ import DB.UserDB;
 import Util.MailUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class ForecastController extends HttpServlet {
         User user = new User();
         User admin = new User();
         user = (User) session.getAttribute("theUser");
-        admin = (User) session.getAttribute("theUser");
+        admin = (User) session.getAttribute("theAdmin");
         
         String url = "/home.jsp";
         
@@ -153,22 +154,26 @@ public class ForecastController extends HttpServlet {
         }
         
         if(action.equals("view-forecasts")){
-            Date date = new Date();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
-            System.out.println(date);
-            StringBuilder sb = new StringBuilder();
-            sb.append(month);
-            sb.append("-" + day);
-            sb.append("-" + year);
-            String dateTime = sb.toString();
-            
-            List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime);
-            request.setAttribute("approvedForecasts",forecasts);
-            url="/view-forecasts.jsp";
+            url = "/main.jsp";
+            if(user!=null){
+                Date date = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                System.out.println(date);
+                StringBuilder sb = new StringBuilder();
+                sb.append(month);
+                sb.append("-" + day);
+                sb.append("-" + year);
+                String dateTime = sb.toString();
+                String status = "approved";
+
+                List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime,status);
+                request.setAttribute("approvedForecasts",forecasts);
+                url="/view-forecasts.jsp";
+            }
         }
         
         if(action.equals("email")){
@@ -207,8 +212,37 @@ public class ForecastController extends HttpServlet {
         
         if(action.equals("admin")){
             List<Forecast> forecasts = ForecastDB.getForecasts();
-            request.setAttribute("submittedForecasts",forecasts);
+            List<Forecast> submittedForecasts = new ArrayList<Forecast>();
+            for(Forecast f : forecasts){
+                if(f.getStatus().equals("Pending")){
+                    submittedForecasts.add(f);
+                }
+            }
+            request.setAttribute("submittedForecasts",submittedForecasts);
             url="/admin.jsp";
+        }
+        
+        if(action.equals("approve")){
+            url = "/main.jsp";
+            String forecastID = request.getParameter("forecastID");
+            if(admin != null){
+                if(!forecastID.isEmpty()){
+                    Forecast forecast = ForecastDB.getForecastById(forecastID);
+                    forecast.setStatus("approved");
+                    ForecastDB.update(forecast);
+                    
+                    List<Forecast> forecasts = ForecastDB.getForecasts();
+                    List<Forecast> submittedForecasts = new ArrayList<Forecast>();
+                    for(Forecast f : forecasts){
+                        if(f.getStatus().equals("Pending")){
+                            submittedForecasts.add(f);
+                        }
+                    }
+            request.setAttribute("submittedForecasts",submittedForecasts);
+                    url="/admin.jsp";
+                }
+            }
+            
         }
         
     getServletContext()
