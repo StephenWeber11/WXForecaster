@@ -25,7 +25,7 @@
                 <td><c:out value="${f.precip}"/></td>
                 
                 <form action="forecast" method="post">
-                    <input type="hidden" name="forecastID" value="${f.forecastID}"/>
+                    <input type="hidden" name="forecastID" value="<c:out value='${f.forecastID}'/>"/>
                     <td>
                         <input type="email" name="email" placeholder="Enter email address" required />
                         <input type="button" value="Email A Friend" class="emailForecast">

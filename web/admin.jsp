@@ -20,13 +20,13 @@
         </tr>
         <c:forEach items="${submittedForecasts}" var="f">
             <tr>
-                <td>${f.highTemp}</td>
-                <td>${f.lowTemp}</td>
-                <td>${f.windSpeed}</td>
-                <td>${f.skyConditions}</td>
-                <td>${f.precip}</td>
+                <td><c:out value="${f.highTemp}"/></td>
+                <td><c:out value="${f.lowTemp}"/></td>
+                <td><c:out value="${f.windSpeed}"/></td>
+                <td><c:out value="${f.skyConditions}"/></td>
+                <td><c:out value="${f.precip}"/></td>
                 <form action="forecast" method="post">
-                    <input type="hidden" name="forecastID" value="${f.forecastID}" />
+                    <input type="hidden" name="forecastID" value="<c:out value='${f.forecastID}'/>" />
                     <td>
                         <button type="submit" name="action" value="approve">Approve</button>
                         <button type="submit" name="action" value="disapprove">Deny</button>
