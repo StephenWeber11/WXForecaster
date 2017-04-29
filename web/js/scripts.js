@@ -1,6 +1,6 @@
 $(document).ready(function(){
    
-   if(window.location.href.indexOf("thank-you.jsp") > -1){
+   if(window.location.href.indexOf("thank-you.jsp") > -1 || window.location.href.indexOf("thank-you-email.jsp") > -1 ){
        console.log("yes");
        var delay = 5000;
        setTimeout(function(){

@@ -15,6 +15,9 @@
             <th>Wind Speed (MPH)</th>
             <th>Sky Conditions</th>
             <th>Precipitation (Inches)</th>
+            <c:if test="${sessionScope.theUser != null || sessionScope.theAdmin !=null}">
+                <th>Email A Friend</th>
+            </c:if>
         </tr>
         <c:forEach items="${approvedForecasts}" var="f">
             <tr>
@@ -24,13 +27,15 @@
                 <td><c:out value="${f.skyConditions}"/></td>
                 <td><c:out value="${f.precip}"/></td>
                 
-                <form action="forecast" method="post">
-                    <input type="hidden" name="forecastID" value="<c:out value='${f.forecastID}'/>"/>
-                    <td>
-                        <input type="email" name="toAddr" placeholder="Enter email address" required />
-                        <input type="button" value="Email A Friend" class="emailForecast">
-                    </td>
-                </form>
+                <c:if test="${sessionScope.theUser != null || sessionScope.theAdmin !=null}">
+                    <form action="forecast" method="post">
+                        <input type="hidden" name="forecastID" value="<c:out value='${f.forecastID}'/>" />
+                        <td>
+                            <input type="email" name="toAddr" placeholder="Enter email address" required />
+                            <button type="submit" name="action" value="email">Send</button>
+                        </td>
+                    </form>
+                </c:if>
             </tr>
         </c:forEach>
     </table>  

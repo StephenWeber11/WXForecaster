@@ -170,53 +170,65 @@ public class ForecastController extends HttpServlet {
         
         if(action.equals("view-forecasts")){
             url = "/main.jsp";
-            if(user != null || admin != null){
-                Date date = new Date();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                System.out.println(date);
-                StringBuilder sb = new StringBuilder();
-                sb.append(month);
-                sb.append("-" + day);
-                sb.append("-" + year);
-                String dateTime = sb.toString();
-                String status = "Approved";
+            Date date = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            System.out.println(date);
+            StringBuilder sb = new StringBuilder();
+            sb.append(month);
+            sb.append("-" + day);
+            sb.append("-" + year);
+            String dateTime = sb.toString();
+            String status = "Approved";
 
-                List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime,status);
-                request.setAttribute("approvedForecasts",forecasts);
-                url="/view-forecasts.jsp";
-            }
+            List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime,status);
+            request.setAttribute("approvedForecasts",forecasts);
+            url="/view-forecasts.jsp";
         }
         
         if(action.equals("email")){
             String toAddr = request.getParameter("toAddr");
-            
-            Forecast forecast = ForecastDB.getForecast(user.getEmail()); 
-            //Sending email need to add more code above..
-            String to = toAddr;
-            String from = user.getEmail();
-            String subject = "Check out this Charlotte area forecast!!";
-            String body 
-                    = "Hi, <br/>"
-                    + "Your 24 hour forecast for Charlotte, NC starting tomorrow at 12:00 am EDT <br/><br/>"
-                    + "High: " + highTemp + "<br/>" + "Low: " + lowTemp + "<br/>"
-                    + "Winds: " + windSpd + "<br/>" + "Skies: " + sky + "<br/>"
-                    + "Precip (Inches): " + precip;
-            
-            boolean isBodyHTML = true;
-            
-            try{
-                MailUtil.sendMail(to, from, subject, body,isBodyHTML);
-            }catch(MessagingException e){
-                String errorMessage
-                        = "Error: Unable to send email. "
-                        + "Check Tomcat logs for details. <br/> ";
-                request.setAttribute("errorMessage",errorMessage);
+            String forecastID = request.getParameter("forecastID");
+            if(!forecastID.isEmpty()){
+                Forecast forecast = ForecastDB.getForecastById(forecastID);
+                int highTemp = forecast.getHighTemp();
+                int lowTemp = forecast.getLowTemp();
+                int windSpd = forecast.getWindSpeed();
+                String sky = forecast.getSkyConditions();
+                double precip = forecast.getPrecip();
+
+                String fromAddr;
+                if(admin != null){
+                    fromAddr = admin.getEmail();
+                }else{
+                    fromAddr = user.getEmail();
+                }
+                
+                String to = toAddr;
+                String from = fromAddr;
+                String subject = "Check out this Charlotte area forecast!!";
+                String body 
+                        = "Hi, <br/>"
+                        + "Your 24 hour forecast for Charlotte, NC starting tomorrow at 12:00 am EDT <br/><br/>"
+                        + "High: " + highTemp + "F<br/>" + "Low: " + lowTemp + "F<br/>"
+                        + "Winds: " + windSpd + "MPH<br/>" + "Skies: " + sky + "<br/>"
+                        + "Precip (Inches): " + precip;
+
+                boolean isBodyHTML = true;
+
+                try{
+                    MailUtil.sendMail(to, from, subject, body,isBodyHTML);
+                }catch(MessagingException e){
+                    String errorMessage
+                            = "Error: Unable to send email. "
+                            + "Check Tomcat logs for details. <br/> ";
+                    request.setAttribute("errorMessage",errorMessage);
+                }
             }
-            url="/forecast.jsp";
+            url="/thank-you-email.jsp";
         }
         
         if(action.equals("admin")){
