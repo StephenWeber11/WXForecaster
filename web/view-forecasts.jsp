@@ -4,14 +4,29 @@
     Author     : Stephen Weber
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@include file="header.jsp" %>
+
+<div>
+    <p>24 Hour forecast for Charlotte, North Carolina beginning at 12:00 AM EDT tomorrow </p>
+    <table>
+        <tr>
+            <th>High Temperature (F)</th>
+            <th>Low Temperature (F)</th>
+            <th>Wind Speed (MPH)</th>
+            <th>Sky Conditions</th>
+            <th>Precipitation (Inches)</th>
+        </tr>
+        <c:forEach items="${submittedForecasts}" var="f">
+            <tr>
+                <td>${f.highTemp}</td>
+                <td>${f.lowTemp}</td>
+                <td>${f.windSpeed}</td>
+                <td>${f.skyConditions}</td>
+                <td>${f.precip}</td>
+            </tr>
+        </c:forEach>
+    </table>  
+</div>
+
+
+<%@include file="footer.jsp" %>

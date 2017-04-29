@@ -6,12 +6,35 @@
 <%@include file="header.jsp" %>
 
 <div>
-    <p>TEST</p>
-    <c:forEach items="${submittedForecasts}" var="forecast">
+    <p>Forecasts submitted by users, please approve or reject.
+        <br/>
+       Please judge these forecasts based on physical plausibility and legitimacy
+    </p>
+    <table>
         <tr>
-            <td>${forecast.highTemp}</td>
+            <th>High Temperature (F)</th>
+            <th>Low Temperature (F)</th>
+            <th>Wind Speed (MPH)</th>
+            <th>Sky Conditions</th>
+            <th>Precipitation (Inches)</th>
         </tr>
-    </c:forEach>
+        <c:forEach items="${submittedForecasts}" var="f">
+            <tr>
+                <td>${f.highTemp}</td>
+                <td>${f.lowTemp}</td>
+                <td>${f.windSpeed}</td>
+                <td>${f.skyConditions}</td>
+                <td>${f.precip}</td>
+                <form action="forecast" method="post">
+                    <input type="hidden" name="forecastID" value="${f.forecastID}" />
+                    <td>
+                        <button type="submit" name="action" value="approve">Approve</button>
+                        <button type="submit" name="action" value="disapprove">Deny</button>
+                    </td>
+                </form>
+            </tr>
+        </c:forEach>
+    </table>  
 </div>
 
 

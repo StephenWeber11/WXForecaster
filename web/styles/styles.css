@@ -34,3 +34,11 @@ img {
 iframe{
     border: none;
 }
+
+table{
+    text-align: center;
+}
+
+table tr th {
+    padding-right: 10px;
+}
