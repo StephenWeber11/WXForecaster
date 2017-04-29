@@ -58,7 +58,6 @@ public class UserController extends HttpServlet {
                         "Please try another email address.";
                 url = "/login.jsp";
             }else{
-                //Validate password.. Code in PasswordUtil
                 if(UserDB.passwordIsValid(email,password)){
                     if(user.getRole().equals("user")){
                         session.setAttribute("theUser",user);
@@ -162,6 +161,7 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        doPost(request,response);
     }
 
 }

@@ -6,6 +6,7 @@
 package Beans;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,28 +21,29 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Forecast implements Serializable{
+    
+    private String forecasterEmail;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String forecasterEmail;
-    
-    private int forecastID;
+    private String forecastID;
     private int highTemp;
     private int lowTemp;
     private int windSpeed;
     private String skyConditions;
     private double precip;
-    @Temporal( TemporalType.DATE )
+    @Temporal( TemporalType.TIMESTAMP )
     private Date dateSubmitted;
+    private String status;
     
     public Forecast(){
         
     }
     
-    public void setForecastID(int forecastID){
+    public void setForecastID(String forecastID){
         this.forecastID = forecastID;
     }
     
-    public int getForecastID(){
+    public String getForecastID(){
         return forecastID;
     }
     
@@ -99,6 +101,14 @@ public class Forecast implements Serializable{
     
     public String getForecasterEmail(){
         return forecasterEmail;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public String getStatus(){
+        return status;
     }
     
 }

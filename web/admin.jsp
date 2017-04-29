@@ -3,15 +3,16 @@
     Created on : Apr 25, 2017, 8:54:06 PM
     Author     : Stephen Weber
 --%>
+<%@include file="header.jsp" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<div>
+    <p>TEST</p>
+    <c:forEach items="${submittedForecasts}" var="forecast">
+        <tr>
+            <td>${forecast.highTemp}</td>
+        </tr>
+    </c:forEach>
+</div>
+
+
+<%@include file="footer.jsp" %>

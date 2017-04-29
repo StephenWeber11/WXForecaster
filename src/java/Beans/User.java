@@ -26,7 +26,6 @@ public class User implements Serializable {
     private String lastName;
     private String password;
     private String role;
-    private String hash;
     private String salt;
     
     public User(){
@@ -80,14 +79,7 @@ public class User implements Serializable {
     public String getSalt(){
         return salt;
     }
-    
-    public void setHash(String hash){
-        this.hash = hash;
-    }
-    
-    public String getHash(){
-        return hash;
-    }
+   
     
     
 }

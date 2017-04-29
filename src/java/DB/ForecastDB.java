@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  * @author Stephen Weber
  */
 public class ForecastDB {
+    String msg;
         
     public static void insert(Forecast user) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -70,7 +71,7 @@ public class ForecastDB {
     public static Forecast getForecast(String email){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT f FROM Forecast f " +
-                "WHERE f.email = :email";
+                "WHERE f.forecasterEmail = :email";
         TypedQuery<Forecast> q = em.createQuery(qString, Forecast.class);
         q.setParameter("email", email);
         try {
@@ -85,9 +86,27 @@ public class ForecastDB {
     
     public static List<Forecast> getForecasts(){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT f FROM Forecast f + "
-                + "WHERE EMAIL != null";
+        String qString = "SELECT f FROM Forecast f "
+                + "WHERE f.forecasterEmail != null";
         TypedQuery<Forecast> q = em.createQuery(qString,Forecast.class);
+        List<Forecast> users;
+        try{
+            users = q.getResultList();
+            if(users == null || users.isEmpty()){
+                users = null;
+            }
+        }finally{
+            em.close();
+        }
+        return users;
+    }
+    
+     public static List<Forecast> getForecasts(String email){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT f FROM Forecast f "
+                + "WHERE f.forecasterEmail = :email";
+        TypedQuery<Forecast> q = em.createQuery(qString,Forecast.class);
+        q.setParameter("email",email);
         List<Forecast> users;
         try{
             users = q.getResultList();
