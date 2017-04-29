@@ -257,7 +257,7 @@ public class ForecastController extends HttpServlet {
                     //Send an email to the submitted notifying that the forecast was approved!
                     String to = toAddr;
                     String from = ADMIN_EMAIL;
-                    String subject = "You're forecast has been approved!";
+                    String subject = "Your forecast has been approved!";
                     String body 
                             = "Hi,<br/><br/>"+
                                 "The administrators over at UNCC WxForecaster have approved your forecast! <br/><br/>" +
