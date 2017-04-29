@@ -36,7 +36,7 @@
                             <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.theUser == null && sessionScope.theAdmin == null}">
-                                    <li><a href="#loginContainer">Login</a></li>
+                                    <li><a href="home.jsp#loginContainer">Login</a></li>
                                 </c:when>   
                                 <c:otherwise>
                                     <li><a href="forecast.jsp">Forecast</a></li>

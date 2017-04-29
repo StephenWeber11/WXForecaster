@@ -9,7 +9,7 @@
 <div class="grid-100">
     <div id="forecastTable">
         <img src="styles/CLTSkyline.jpg">
-        <p class="center">24 Hour forecast for Charlotte, North Carolina beginning at 12:00 AM EDT tomorrow </p>
+        <h2 class="center">24 Hour forecast for Charlotte, North Carolina beginning at 12:00 AM EDT tomorrow </h2>
         <table>
             <tr>
                 <th>High Temperature (F)</th>

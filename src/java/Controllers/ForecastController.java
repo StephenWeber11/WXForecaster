@@ -183,6 +183,7 @@ public class ForecastController extends HttpServlet {
             sb.append("-" + year);
             String dateTime = sb.toString();
             String status = "Approved";
+            System.out.println(dateTime);
 
             List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime,status);
             request.setAttribute("approvedForecasts",forecasts);
