@@ -171,3 +171,18 @@ table tr th {
 #forecastTable img{
     width: 100%;
 }
+
+#radar iframe{
+    height: 1000px !important;
+}
+
+.mosdata iframe{
+    margin-top: 25px;
+    height: 557px !important;
+    margin-botom: 25px;
+}
+
+#forecastForm{
+    margin-top: 25px;
+    padding-left: 8%;
+}

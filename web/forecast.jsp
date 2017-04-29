@@ -4,14 +4,13 @@
     Author     : Stephen
 --%>
 <%@include file="/header.jsp" %>
-<div>
+<div class="grid-100">
     <p>${msg}</p>
     <p>${errorMessage}</p>
-    <form action="forecast" method="post">
+    <form action="forecast" method="post" id="forecastForm">
         <input type="hidden" name="action" value="add">
         <label>High (F)</label>
         <input type="number" name="highTemp" min="0" max="110" required />
-        <br/>
         <label>Low (F)</label>
         <input type="number" name="lowTemp" min="0" max="110" required />
         <label>Wind Speed (MPH)</label>
@@ -30,9 +29,18 @@
         <input type="number" name="precip" min="0" max="5" step="0.01" requierd />
         <button type="submit">Submit</button>
     </form>
-</div>
-<div>
-    <iframe src="http://weather.rap.ucar.edu/radar/displayRad.php?icao=KUSA&prod=bref1&bkgr=gray&endDate=20170428&endTime=-1&duration=6" width="1220px" height="1000px"></iframe>
+    <div class="grid-100">
+        <div class="grid-50">
+            <div class="mosdata">
+                <iframe src="http://www.nws.noaa.gov/cgi-bin/mos/getmav.pl?sta=KCLT"></iframe>
+            </div>
+        </div>
+        <div class="grid-50">
+            <div class="mosdata">
+                <iframe src="http://www.nws.noaa.gov/cgi-bin/mos/getmet.pl?sta=KCLT"></iframe>
+            </div>
+        </div>
+    <div>
 </div>
 
 <%@include file="/footer.jsp" %>

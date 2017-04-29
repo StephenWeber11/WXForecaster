@@ -5,7 +5,7 @@
 <html>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>WxForecaster</title>
+        <title>UNCC WxForecaster</title>
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/unsemantic-grid-responsive.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -19,10 +19,10 @@
                         <div id="wxName">
                         <c:choose>
                             <c:when test="${sessionScope.theUser != null || sessionScope.theAdmin != null}">
-                                <p><a href="forecast">WxForecaster</a></p>
+                                <p><a href="forecast">UNCC WxForecaster</a></p>
                             </c:when>
                             <c:otherwise>
-                                <p><a href="home.jsp">WxForecaster</a></p>
+                                <p><a href="home.jsp">UNCC WxForecaster</a></p>
                             </c:otherwise>
                         </c:choose>
                         </div>
