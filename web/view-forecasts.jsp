@@ -7,7 +7,7 @@
 <%@include file="header.jsp" %>
 
 <div>
-    <p>24 Hour forecast for Charlotte, North Carolina beginning at 12:00 AM EDT tomorrow </p>
+    <p class="center">24 Hour forecast for Charlotte, North Carolina beginning at 12:00 AM EDT tomorrow </p>
     <table>
         <tr>
             <th>High Temperature (F)</th>
@@ -18,17 +18,18 @@
         </tr>
         <c:forEach items="${approvedForecasts}" var="f">
             <tr>
-                <td>${f.highTemp}</td>
-                <td>${f.lowTemp}</td>
-                <td>${f.windSpeed}</td>
-                <td>${f.skyConditions}</td>
-                <td>${f.precip}</td>
+                <td><c:out value="${f.highTemp}"/></td>
+                <td><c:out value="${f.lowTemp}"/></td>
+                <td><c:out value="${f.windSpeed}"/></td>
+                <td><c:out value="${f.skyConditions}"/></td>
+                <td><c:out value="${f.precip}"/></td>
                 
                 <form action="forecast" method="post">
                     <input type="hidden" name="forecastID" value="${f.forecastID}"/>
-                    <input type="button" value="Email A Friend" class="emailForecast">
-<!--                    <input type="email" name="toAddr" style="display: none !important;" required/>-->
-<!--                    <button type="submit" name="action" value="SendEmail"></button>-->
+                    <td>
+                        <input type="email" name="email" placeholder="Enter email address" required />
+                        <input type="button" value="Email A Friend" class="emailForecast">
+                    </td>
                 </form>
             </tr>
         </c:forEach>

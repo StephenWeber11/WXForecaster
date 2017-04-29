@@ -34,12 +34,13 @@
                     </c:choose>
                     <li><a href="user?action=about">About Us</a></li>
                     <li><a href="user?action=how">Forecasting 101</a></li>
+                    <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
                     <c:choose>
                         <c:when test="${sessionScope.theUser == null && sessionScope.theAdmin == null}">
                             <li><a href="login.jsp">Login</a></li>
                         </c:when>   
                         <c:otherwise>
-                            <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
+                            <li><a href="forecast.jsp">Forecast</a></li>
                             <li><a href="user?action=logout">Log Out</a></li>
                         </c:otherwise>
                     </c:choose>

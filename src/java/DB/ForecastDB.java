@@ -14,6 +14,7 @@ import java.util.List;
 import DB.DBUtil;
 import Util.PasswordUtil;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -89,6 +90,24 @@ public class ForecastDB {
         String qString = "SELECT f FROM Forecast f "
                 + "WHERE f.forecasterEmail != null";
         TypedQuery<Forecast> q = em.createQuery(qString,Forecast.class);
+        List<Forecast> users;
+        try{
+            users = q.getResultList();
+            if(users == null || users.isEmpty()){
+                users = null;
+            }
+        }finally{
+            em.close();
+        }
+        return users;
+    }
+    
+    public static List<Forecast> getTwentyFourForecasts(String dateTime){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT f FROM Forecast f "
+                + "WHERE f.dateSubmitted = :dateTime";
+        TypedQuery<Forecast> q = em.createQuery(qString,Forecast.class);
+        q.setParameter("dateTime",dateTime);
         List<Forecast> users;
         try{
             users = q.getResultList();

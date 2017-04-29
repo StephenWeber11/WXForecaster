@@ -31,8 +31,7 @@ public class Forecast implements Serializable{
     private int windSpeed;
     private String skyConditions;
     private double precip;
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date dateSubmitted;
+    private String dateSubmitted;
     private String status;
     
     public Forecast(){
@@ -87,11 +86,11 @@ public class Forecast implements Serializable{
         return precip;
     }
     
-    public void setDateSubmitted(Date dateSubmitted){
+    public void setDateSubmitted(String dateSubmitted){
         this.dateSubmitted = dateSubmitted;
     }
     
-    public Date getDateSubmitted(){
+    public String getDateSubmitted(){
         return dateSubmitted;
     }
     

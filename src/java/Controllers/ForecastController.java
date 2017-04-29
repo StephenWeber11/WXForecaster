@@ -68,34 +68,39 @@ public class ForecastController extends HttpServlet {
                 forecast.setPrecip(precip);
                 forecast.setForecasterEmail(user.getEmail());
                 forecast.setStatus("Pending");
-                Date date = new Date();
-                forecast.setDateSubmitted(date);
                 
+                Date date = new Date();
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 StringBuilder sb = new StringBuilder();
-//                sb.append(month);
-//                sb.append("-"+day);
                 sb.append(date + " ");
                 sb.append(user.getEmail());
                 String id = sb.toString();
                 forecast.setForecastID(id);
                 
-//                List<Forecast> forecasts;
-//                forecasts = ForecastDB.getForecasts(user.getEmail());
-//                if(forecasts != null){
-//                    for(Forecast f : forecasts){
-//                        if(f.getDateSubmitted().toString().equals(id)){
-//                            msg = "Sorry but you've already submitted a forecast today! Try again tomorrow!";
-//                            url="/forecasts.jsp";
-//                        }else{
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(month);
+                sb2.append("-" + day);
+                sb2.append("-" + year);
+                String dateTime = sb2.toString();
+                forecast.setDateSubmitted(dateTime);
+                
+                List<Forecast> forecasts;
+                forecasts = ForecastDB.getForecasts(user.getEmail());
+                if(forecasts != null){
+                    for(Forecast f : forecasts){
+                        if(f.getDateSubmitted().equals(dateTime)){
+                            msg = "Sorry but you've already submitted a forecast today! Try again tomorrow!";
+                            url="/forecast.jsp";
+                            break;
+                        }else{
                             ForecastDB.insert(forecast);
-//                        }
-//                    }
-//                }
+                        }
+                    }
+                    request.setAttribute("msg",msg);
+                }
                 
                 //Send the admin (me) an email stating that a user has just added a new forecast..
                 String to = "stephen.weber3@gmail.com";
@@ -128,14 +133,14 @@ public class ForecastController extends HttpServlet {
 
                 boolean isBodyHTML = true;
 
-                try{
-                    MailUtil.sendMail(to, from, subject, body,isBodyHTML);
-                }catch(MessagingException e){
-                    String errorMessage
-                            = "Error: Unable to send email. "
-                            + "Check Tomcat logs for details. <br/> ";
-                    request.setAttribute("errorMessage",errorMessage);
-                }
+//                try{
+//                    MailUtil.sendMail(to, from, subject, body,isBodyHTML);
+//                }catch(MessagingException e){
+//                    String errorMessage
+//                            = "Error: Unable to send email. "
+//                            + "Check Tomcat logs for details. <br/> ";
+//                    request.setAttribute("errorMessage",errorMessage);
+//                }
 
                 url="/forecast.jsp";
                 
@@ -145,7 +150,20 @@ public class ForecastController extends HttpServlet {
         }
         
         if(action.equals("view-forecasts")){
-            List<Forecast> forecasts = ForecastDB.getForecasts();
+            Date date = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            System.out.println(date);
+            StringBuilder sb = new StringBuilder();
+            sb.append(month);
+            sb.append("-" + day);
+            sb.append("-" + year);
+            String dateTime = sb.toString();
+            
+            List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime);
             request.setAttribute("approvedForecasts",forecasts);
             url="/view-forecasts.jsp";
         }
