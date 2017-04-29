@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
                     }
                     if(user.getRole().equals("admin")){
                         session.setAttribute("theAdmin",user);
-                        url = "/admin.jsp";
+                        url = "/main.jsp";
                     }
                 }else{
                     msg="The password you entered is invalid, please try again!";
@@ -90,7 +90,6 @@ public class UserController extends HttpServlet {
             user.setLastName(lastName);
             user.setEmail(email);
             user.setRole("user");
-            //user.setPassword(password);
             
             String message;
             try {
@@ -124,20 +123,6 @@ public class UserController extends HttpServlet {
                 session.setAttribute("theUser", user);
                 url = "/main.jsp";
                 UserDB.insert(user);
-            }
-        }
-        
-        if(action.equals("learn")){
-            url = "/forecasting101.jsp";
-            if(user != null){
-                url="/main.jsp";
-            }
-        }
-        
-        if(action.equals("forecast")){
-            url = "/forecast.jsp";
-            if(user != null){
-                url="/home.jsp";
             }
         }
         

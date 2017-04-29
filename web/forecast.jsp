@@ -26,7 +26,6 @@
             <option value="Cloudy">Cloudy</option>
             <option value="Fair">Fair</option>
         </select>
-<!--        <input type="text" name="skyCond" required />-->
         <label>Precipitation (Inches)</label>
         <input type="number" name="precip" min="0" max="5" step="0.01" requierd />
         <button type="submit">Submit</button>

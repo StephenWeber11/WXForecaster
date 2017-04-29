@@ -1,7 +1,11 @@
 $(document).ready(function(){
    
-//    $('.emailForecast').click(function(){
-//        window.open("email-a-friend.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
-//    });
+   if(window.location.href.indexOf("thank-you.jsp") > -1){
+       console.log("yes");
+       var delay = 5000;
+       setTimeout(function(){
+           window.location = "/WxForecaster/main.jsp"; 
+       },delay);
+   }
     
 });

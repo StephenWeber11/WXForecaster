@@ -44,7 +44,9 @@
                             <li><a href="user?action=logout">Log Out</a></li>
                         </c:otherwise>
                     </c:choose>
-                            <li><a href="forecast?action=admin">Admin</a></li>         
+                    <c:if test="${sessionScope.theAdmin != null}">
+                        <li><a href="forecast?action=admin">Admin</a></li>  
+                    </c:if>
                 </ul>
             </nav>
         </div>

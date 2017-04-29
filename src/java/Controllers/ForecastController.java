@@ -42,6 +42,8 @@ public class ForecastController extends HttpServlet {
         user = (User) session.getAttribute("theUser");
         admin = (User) session.getAttribute("theAdmin");
         
+        final String ADMIN_EMAIL = "sweber19@uncc.edu";
+        
         String url = "/home.jsp";
         
         if(action == null){
@@ -50,6 +52,19 @@ public class ForecastController extends HttpServlet {
         }
         if(action.equals("join")){
             url = "/home.jsp";
+        }
+        
+        
+        /*      Handle admin redirect and population of data        */
+        if(admin != null){
+            List<Forecast> forecasts = ForecastDB.getForecasts();
+                List<Forecast> submittedForecasts = new ArrayList<Forecast>();
+                for(Forecast f : forecasts){
+                    if(f.getStatus().equals("Pending")){
+                        submittedForecasts.add(f);
+                    }
+                }
+                request.setAttribute("submittedForecasts",submittedForecasts);
         }
         
         if(action.equals("add")){
@@ -146,7 +161,7 @@ public class ForecastController extends HttpServlet {
                     }
                 }
 
-                url="/forecast.jsp";
+                url="/thank-you.jsp";
                 
                 
             }
@@ -177,13 +192,7 @@ public class ForecastController extends HttpServlet {
         }
         
         if(action.equals("email")){
-            String highTemp = request.getParameter("highTemp");
-            String lowTemp = request.getParameter("lowTemp");
-            String windSpd = request.getParameter("windSpd");
-            String sky = request.getParameter("skyCond");
-            String precip = request.getParameter("precip");
             String toAddr = request.getParameter("toAddr");
-            //TODO: Add rest of parameters!
             
             Forecast forecast = ForecastDB.getForecast(user.getEmail()); 
             //Sending email need to add more code above..
@@ -231,6 +240,30 @@ public class ForecastController extends HttpServlet {
                     forecast.setStatus("Approved");
                     ForecastDB.update(forecast);
                     
+                    String toAddr = forecast.getForecasterEmail();
+                    //Send an email to the submitted notifying that the forecast was approved!
+                    String to = toAddr;
+                    String from = ADMIN_EMAIL;
+                    String subject = "You're forecast has been approved!";
+                    String body 
+                            = "Hi,<br/><br/>"+
+                                "The administrators over at UNCC WxForecaster have approved your forecast! <br/><br/>" +
+                                "Please go to the folowing link to compare it with everyone else's!<br/><br/>" +
+                                "<a href='/'>View Forecasts</a> <br/><br/>" +
+                                "Thank you!" + "<br/><br/>" +
+                                "<span style='size:25px'>UNCC WxForecaster</span>";
+
+
+                    boolean isBodyHTML = true;
+
+                    try{
+                        MailUtil.sendMail(to, from, subject, body,isBodyHTML);
+                    }catch(MessagingException e){
+                        String errorMessage
+                                = "Error: Unable to send email. "
+                                + "Check Tomcat logs for details. <br/> ";
+                        request.setAttribute("errorMessage",errorMessage);
+                    
                     List<Forecast> forecasts = ForecastDB.getForecasts();
                     List<Forecast> submittedForecasts = new ArrayList<Forecast>();
                     for(Forecast f : forecasts){
@@ -238,12 +271,62 @@ public class ForecastController extends HttpServlet {
                             submittedForecasts.add(f);
                         }
                     }
-            request.setAttribute("submittedForecasts",submittedForecasts);
-                    url="/admin.jsp";
+                request.setAttribute("submittedForecasts",submittedForecasts);
+                        url="/admin.jsp";
+                    }
                 }
             }
             
         }
+        
+       if(action.equals("disapprove")){
+            url = "/main.jsp";
+            String forecastID = request.getParameter("forecastID");
+            if(admin != null){
+                if(!forecastID.isEmpty()){
+                    Forecast forecast = ForecastDB.getForecastById(forecastID);
+                    forecast.setStatus("Rejected");
+                    ForecastDB.update(forecast);
+                    
+                    String toAddr = forecast.getForecasterEmail();
+                    //Send an email to the submitted notifying that the forecast was approved!
+                    String to = toAddr;
+                    String from = ADMIN_EMAIL;
+                    String subject = "You're forecast has been rejected";
+                    String body 
+                            = "Hi,<br/><br/>"+
+                                "We regret to inform you that, after review, we've decided to reject your forecast submission." +
+                                "This based on the premise that the data you entered was not viable and skewed the other forecasts negatively.<br/><br/>" +
+                                "Please try again tomorrow!<br/><br/>" +
+                                "Thank you!" + "<br/><br/>" +
+                                "<span style='size:25px'>UNCC WxForecaster</span>";
+
+
+                    boolean isBodyHTML = true;
+
+                    try{
+                        MailUtil.sendMail(to, from, subject, body,isBodyHTML);
+                    }catch(MessagingException e){
+                        String errorMessage
+                                = "Error: Unable to send email. "
+                                + "Check Tomcat logs for details. <br/> ";
+                        request.setAttribute("errorMessage",errorMessage);
+                    }
+                    
+                    
+                    List<Forecast> forecasts = ForecastDB.getForecasts();
+                    List<Forecast> submittedForecasts = new ArrayList<Forecast>();
+                    for(Forecast f : forecasts){
+                        if(f.getStatus().equals("Pending")){
+                            submittedForecasts.add(f);
+                        }
+                    }
+                    request.setAttribute("submittedForecasts",submittedForecasts);
+                    url="/admin.jsp";
+                }
+            }
+            
+        } 
         
     getServletContext()
                 .getRequestDispatcher(url)

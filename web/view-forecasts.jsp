@@ -27,7 +27,7 @@
                 <form action="forecast" method="post">
                     <input type="hidden" name="forecastID" value="<c:out value='${f.forecastID}'/>"/>
                     <td>
-                        <input type="email" name="email" placeholder="Enter email address" required />
+                        <input type="email" name="toAddr" placeholder="Enter email address" required />
                         <input type="button" value="Email A Friend" class="emailForecast">
                     </td>
                 </form>
