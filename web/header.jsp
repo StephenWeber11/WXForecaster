@@ -7,47 +7,48 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>WxForecaster</title>
         <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/unsemantic-grid-responsive.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
     </head>
     <body>
         <div id="header">
-                <nav id="header_menu">
-                <ul class="left" >
-                    <c:choose>
-                        <c:when test="${sessionScope.theUser != null || sessionScope.theAdmin != null}">
-                            <li><a href="forecast">WxForecaster</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="home.jsp">WxForecaster</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-                <ul class="right">
-                    <c:choose>
-                        <c:when test="${sessionScope.theUser != null}">
-                            <li>Hello, <span>${theUser.firstName}</span></li>
-                        </c:when>
-                        <c:when test="${sessionScope.theAdmin != null}">
-                        <li>Hello, <span>${theAdmin.firstName}</span></li>
-                        </c:when>
-                    </c:choose>
-                    <li><a href="user?action=about">About Us</a></li>
-                    <li><a href="user?action=how">Forecasting 101</a></li>
-                    <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
-                    <c:choose>
-                        <c:when test="${sessionScope.theUser == null && sessionScope.theAdmin == null}">
-                            <li><a href="login.jsp">Login</a></li>
-                        </c:when>   
-                        <c:otherwise>
-                            <li><a href="forecast.jsp">Forecast</a></li>
-                            <li><a href="user?action=logout">Log Out</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:if test="${sessionScope.theAdmin != null}">
-                        <li><a href="forecast?action=admin">Admin</a></li>  
-                    </c:if>
-                </ul>
+            <nav class="grid-container">
+                <div class="grid-30">
+                    <div id="headerName">
+                        <div id="wxName">
+                        <c:choose>
+                            <c:when test="${sessionScope.theUser != null || sessionScope.theAdmin != null}">
+                                <p><a href="forecast">WxForecaster</a></p>
+                            </c:when>
+                            <c:otherwise>
+                                <p><a href="home.jsp">WxForecaster</a></p>
+                            </c:otherwise>
+                        </c:choose>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-70">
+                    <div id="siteNav">
+                        <ul>
+                            <li><a href="user?action=about">About Us</a></li>
+                            <li><a href="user?action=how">Forecasting 101</a></li>
+                            <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.theUser == null && sessionScope.theAdmin == null}">
+                                    <li><a href="#loginContainer">Login</a></li>
+                                </c:when>   
+                                <c:otherwise>
+                                    <li><a href="forecast.jsp">Forecast</a></li>
+                                    <li><a href="user?action=logout">Log Out</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                            <c:if test="${sessionScope.theAdmin != null}">
+                                <li><a href="forecast?action=admin">Admin</a></li>  
+                            </c:if>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </div>
         <div class="grid-container">

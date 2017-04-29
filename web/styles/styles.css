@@ -11,7 +11,8 @@ and open the template in the editor.
 body {
     margin: 0 auto;
     background-color: #FFF;
-    font-family: Helvetica-Light, Arial, sans-serif
+    font-family: Helvetica-Light, Arial, sans-serif;
+    /*background-image: url('imrs.jpg');*/
 }
 
 h1, h2, h3, p, ul {
@@ -23,16 +24,11 @@ img {
     border: 0
 }
 
-.grid-container{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1200px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 iframe{
     border: none;
+    width: 100%;
+    height: 750px;
+    
 }
 
 table{
@@ -46,4 +42,131 @@ table tr th {
 
 .center{
     text-align: center;
+}
+
+#header{
+    width: 100%;
+    background-color: cadetblue;
+}
+
+.left{
+    float: left;
+    width: 30%;
+}
+
+#headerName{
+    display: block;
+}
+
+#wxName{
+    height: 34px;
+    line-height: 34px;
+    margin-right: 10px;
+    float: left; 
+}
+
+#wxName p a{
+    text-decoration: none;
+    color: white;
+}
+
+#siteNav{
+    float: right;
+    margin: 8px 8px 6px 10px;
+}
+
+#siteNav ul{
+    list-style: outside;
+}
+
+#siteNav ul li{
+    display: inline;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-align: right;
+    padding-left: 10px;
+    z-index: 500;
+}
+
+#siteNav ul li a{
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+}
+
+#homeBanner{
+    border-top: 5px solid black;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#homeSfcAnalysis{
+    text-align: center;
+    margin-left: 20%;
+}
+
+#footerBorder{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 25px;
+    border-top: 1px solid black;
+}
+
+#footerNav ul{
+    list-style: outside;
+}
+
+#footerNav ul li{
+    display: block;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 10px;
+    z-index: 500;
+}
+
+#footerNav ul li a{
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 14px;
+    color: white;
+}
+
+#footer{
+    background-color: cadetblue;
+    
+}
+
+#copyright{
+    padding-top: 15px;
+    padding-bottom: 20px;
+    color: white;
+    margin-left: 20px;
+}
+
+#loginContainer{
+    width: 250px;
+    background-color: #e4e4e4;
+    padding: 14px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: arial; 
+}
+
+#loginPageLarger{
+    height:800px;
+}
+
+#forecastTable{     
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+
+#forecastTable img{
+    width: 100%;
 }

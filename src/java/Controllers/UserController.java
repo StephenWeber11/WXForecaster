@@ -56,7 +56,7 @@ public class UserController extends HttpServlet {
             if(!UserDB.emailExists(email)){
                 msg = "Sorry but this user does not exist. <br/>" + 
                         "Please try another email address.";
-                url = "/login.jsp";
+                url = "/home.jsp";
             }else{
                 if(UserDB.passwordIsValid(email,password)){
                     if(user.getRole().equals("user")){
@@ -69,7 +69,7 @@ public class UserController extends HttpServlet {
                     }
                 }else{
                     msg="The password you entered is invalid, please try again!";
-                    url="/login.jsp";
+                    url="/home.jsp";
                     
                 }
             }
