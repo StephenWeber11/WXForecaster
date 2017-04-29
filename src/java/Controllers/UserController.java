@@ -50,7 +50,6 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             user = UserDB.getUser(email);
-            String salt = user.getSalt();
             
             String msg = "";
             if(!UserDB.emailExists(email)){

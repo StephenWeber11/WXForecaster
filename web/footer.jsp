@@ -12,7 +12,6 @@
                     <div class="grid-25">
                         <div id="footerNav">
                             <ul>
-                                <li><a href="user?action=about">About Us</a></li>
                                 <li><a href="user?action=how">Forecasting 101</a></li>
                                 <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
                                 <c:if test="${sessionScope.theAdmin != null}">
