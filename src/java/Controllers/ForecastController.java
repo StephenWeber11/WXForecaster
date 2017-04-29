@@ -89,17 +89,20 @@ public class ForecastController extends HttpServlet {
                 
                 List<Forecast> forecasts;
                 forecasts = ForecastDB.getForecasts(user.getEmail());
+                boolean submittedToday = false;
                 if(forecasts != null){
                     for(Forecast f : forecasts){
                         if(f.getDateSubmitted().equals(dateTime)){
                             msg = "Sorry but you've already submitted a forecast today! Try again tomorrow!";
                             url="/forecast.jsp";
-                            break;
-                        }else{
-                            ForecastDB.insert(forecast);
+                            submittedToday = true;
                         }
                     }
                     request.setAttribute("msg",msg);
+                }
+                
+                if(!submittedToday){
+                    ForecastDB.insert(forecast);
                 }
                 
                 //Send the admin (me) an email stating that a user has just added a new forecast..

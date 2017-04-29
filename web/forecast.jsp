@@ -17,7 +17,16 @@
         <label>Wind Speed (MPH)</label>
         <input type="number" name="windSpd" min="0" max="50" required />
         <label>Sky Conditions</label>
-        <input type="text" name="skyCond" required />
+        <select name="skyCond" required>
+            <option value=" " selected></option>
+            <option value="clear">Clear</option>
+            <option value="Mostly Sunny">Mostly Sunny</option>
+            <option value="Partly Cloudy">Partly Cloudy</option>
+            <option value="Mostly Cloudy">Mostly Cloudy</option>
+            <option value="Cloudy">Cloudy</option>
+            <option value="Fair">Fair</option>
+        </select>
+<!--        <input type="text" name="skyCond" required />-->
         <label>Precipitation (Inches)</label>
         <input type="number" name="precip" min="0" max="5" step="0.01" requierd />
         <button type="submit">Submit</button>
