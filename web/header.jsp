@@ -19,7 +19,7 @@
                         <div id="wxName">
                         <c:choose>
                             <c:when test="${sessionScope.theUser != null || sessionScope.theAdmin != null}">
-                                <p><a href="forecast">UNCC WxForecaster</a></p>
+                                <p><a href="main.jsp">UNCC WxForecaster</a></p>
                             </c:when>
                             <c:otherwise>
                                 <p><a href="home.jsp">UNCC WxForecaster</a></p>
@@ -31,8 +31,7 @@
                 <div class="grid-70">
                     <div id="siteNav">
                         <ul>
-                            <li><a href="user?action=about">About Us</a></li>
-                            <li><a href="user?action=how">Forecasting 101</a></li>
+                            <li><a href="forecasting101.jsp">Forecasting 101</a></li>
                             <li><a href="forecast?action=view-forecasts">View Forecasts</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.theUser == null && sessionScope.theAdmin == null}">
