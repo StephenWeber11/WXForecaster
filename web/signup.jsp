@@ -6,15 +6,18 @@
 
 <%@include file="/header.jsp"%>
 <div id="signUpForm">
-    <form action="user" method="post">
-        <input type="hidden" name="action" value="create"/>
-        <input type="text" name="firstName" value="firstName"/>
-        <input type="text" name="lastName" value="lastName"/>
-        <input type="email" name="email" value="email"/>
-        <input type="password" name="password" value="password"/>
-        <input type="submit" value="Create Account"/>
-    </form>
     <p>${message}</p>
     <p>${msg}</p>
+    <br/>
+    <h2 id="registerAccount">Create an account</h2>
+    <form action="user" method="post">
+        <input type="hidden" name="action" value="create"/>
+        <input type="text" name="firstName" class="registerFormInput" placeholder="First Name*"/>
+        <input type="text" name="lastName" class="registerFormInput" placeholder="Last Name*"/>
+        <input type="email" name="email" class="registerFormInput" placeholder="Email Address*"/>
+        <input type="password" name="password" class="registerFormInput" placeholder="Password*"/>
+        <input type="password" name="confirmPass" class="registerFormInput" placeholder="Confirm Password*"/>
+        <input type="submit" value="Create Account"/>
+    </form>
 </div>
 <%@include file="/footer.jsp" %>

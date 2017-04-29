@@ -83,47 +83,54 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String type = request.getParameter("type");
             String password = request.getParameter("password");
+            String confirmPass = request.getParameter("confirmPass");
             String msg = "";
             
-            user = new User();
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setEmail(email);
-            user.setRole("user");
+            msg="Your passwords do not match, please try again!";
+            url="/signup.jsp";
             
-            String message;
-            try {
-                PasswordUtil.checkPasswordStrength(password);
-                message = "";
-            } catch (Exception e) {
-                message = e.getMessage();
-            }
-            request.setAttribute("message", message);  
-            
-            //Hash and salt password from Chapter 17 example
-            String salt = "";
-            String saltedAndHashedPassword;
-            try {
-                salt = PasswordUtil.getSalt();
-                saltedAndHashedPassword = PasswordUtil.hashPassword(password+salt);                    
+            if(password.equals(confirmPass)){
+                user = new User();
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setEmail(email);
+                user.setRole("user");
 
-            } catch (NoSuchAlgorithmException ex) {
-                saltedAndHashedPassword = ex.getMessage();
+                String message;
+                try {
+                    PasswordUtil.checkPasswordStrength(password);
+                    message = "";
+                } catch (Exception e) {
+                    message = e.getMessage();
+                }
+                request.setAttribute("message", message);  
+
+                //Hash and salt password from Chapter 17 example
+                String salt = "";
+                String saltedAndHashedPassword;
+                try {
+                    salt = PasswordUtil.getSalt();
+                    saltedAndHashedPassword = PasswordUtil.hashPassword(password+salt);                    
+
+                } catch (NoSuchAlgorithmException ex) {
+                    saltedAndHashedPassword = ex.getMessage();
+                }
+
+                user.setSalt(salt);
+                user.setPassword(saltedAndHashedPassword);
+
+                if(UserDB.emailExists(email)){
+                    msg = "Sorry, the email you entered already exists. <br/>" +
+                            "Please enter another email address.";
+                    url = "/signup.jsp";
+                    session.setAttribute("msg", msg);
+                }else{
+                    session.setAttribute("theUser", user);
+                    url = "/main.jsp";
+                    UserDB.insert(user);
+                }
             }
-            
-            user.setSalt(salt);
-            user.setPassword(saltedAndHashedPassword);
-            
-            if(UserDB.emailExists(email)){
-                msg = "Sorry, the email you entered already exists. <br/>" +
-                        "Please enter another email address.";
-                url = "/signup.jsp";
-                session.setAttribute("msg", msg);
-            }else{
-                session.setAttribute("theUser", user);
-                url = "/main.jsp";
-                UserDB.insert(user);
-            }
+            session.setAttribute("msg",msg);
         }
         
         if(action.equals("logout")){
