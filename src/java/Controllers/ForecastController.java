@@ -155,7 +155,7 @@ public class ForecastController extends HttpServlet {
         
         if(action.equals("view-forecasts")){
             url = "/main.jsp";
-            if(user!=null){
+            if(user != null || admin != null){
                 Date date = new Date();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
@@ -168,7 +168,7 @@ public class ForecastController extends HttpServlet {
                 sb.append("-" + day);
                 sb.append("-" + year);
                 String dateTime = sb.toString();
-                String status = "approved";
+                String status = "Approved";
 
                 List<Forecast> forecasts = ForecastDB.getTwentyFourForecasts(dateTime,status);
                 request.setAttribute("approvedForecasts",forecasts);
@@ -228,7 +228,7 @@ public class ForecastController extends HttpServlet {
             if(admin != null){
                 if(!forecastID.isEmpty()){
                     Forecast forecast = ForecastDB.getForecastById(forecastID);
-                    forecast.setStatus("approved");
+                    forecast.setStatus("Approved");
                     ForecastDB.update(forecast);
                     
                     List<Forecast> forecasts = ForecastDB.getForecasts();
