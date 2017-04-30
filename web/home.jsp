@@ -10,7 +10,7 @@
     </div>
     <div class="grid-100">
         <div id="homeSfcAnalysis">
-            <iframe src="http://weather.rap.ucar.edu/surface/displaySfc.php?region=clt" align="middle"></iframe>
+            <iframe src="http://weather.rap.ucar.edu/surface/displaySfc.php?region=clt" ></iframe>
         </div>
     </div>
     <div class="grid-100">

@@ -20,9 +20,9 @@
                 <li><a href="http://mp1.met.psu.edu/~fxg1/ewall.html">Penn State E-Wall (Advanced)</a></li>
             </ul>
             <br/>
-            <iframe src="https://www.youtube.com/embed/9Kk3uVFjzcg" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/9Kk3uVFjzcg" allowfullscreen></iframe>
             <br/><br/>
-            <iframe src="https://www.youtube.com/embed/bd7DcVnrSL8" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/bd7DcVnrSL8" allowfullscreen></iframe>
         </div>
         <div class="grid-75">
             <h3 class="center">Forecasting Tips Courtesy of Meteorologist Jeff Haby</h3>

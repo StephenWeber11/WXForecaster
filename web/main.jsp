@@ -46,6 +46,6 @@
 </div>
 
 <div id="radar">
-    <iframe src="http://weather.rap.ucar.edu/radar/displayRad.php?icao=KUSA&prod=bref1&bkgr=gray&endDate=20170428&endTime=-1&duration=6" width="1220px" height="1000px"></iframe>
+    <iframe src="http://weather.rap.ucar.edu/radar/displayRad.php?icao=KUSA&prod=bref1&bkgr=gray&endDate=20170428&endTime=-1&duration=6"></iframe>
 </div>
 <%@include file="/footer.jsp" %>

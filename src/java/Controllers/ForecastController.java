@@ -63,13 +63,19 @@ public class ForecastController extends HttpServlet {
             String sky = request.getParameter("skyCond");
             double precip = Double.parseDouble(request.getParameter("precip"));
             
-            if(user != null){
+            if(user != null || admin != null){
                 forecast.setHighTemp(high);
                 forecast.setLowTemp(low);
                 forecast.setWindSpeed(wnd);
                 forecast.setSkyConditions(sky);
                 forecast.setPrecip(precip);
-                forecast.setForecasterEmail(user.getEmail());
+                
+                if(user != null){
+                    forecast.setForecasterEmail(user.getEmail());
+                }else{
+                    forecast.setForecasterEmail(admin.getEmail());
+                }
+                
                 forecast.setStatus("Pending");
                 
                 Date date = new Date();
@@ -79,7 +85,13 @@ public class ForecastController extends HttpServlet {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 StringBuilder sb = new StringBuilder();
                 sb.append(date + " ");
-                sb.append(user.getEmail());
+                
+                if(user != null){
+                    sb.append(user.getEmail());
+                }else{
+                    sb.append(admin.getEmail());
+                }
+                
                 String id = sb.toString();
                 forecast.setForecastID(id);
                 
@@ -91,7 +103,13 @@ public class ForecastController extends HttpServlet {
                 forecast.setDateSubmitted(dateTime);
                 
                 List<Forecast> forecasts;
-                forecasts = ForecastDB.getForecasts(user.getEmail());
+                
+                if(user != null){
+                    forecasts = ForecastDB.getForecasts(user.getEmail());
+                }else{
+                    forecasts = ForecastDB.getForecasts(admin.getEmail());
+                }
+                
                 boolean submittedToday = false;
                 if(forecasts != null){
                     for(Forecast f : forecasts){
@@ -109,8 +127,14 @@ public class ForecastController extends HttpServlet {
                     ForecastDB.insert(forecast);
                 
                     //Send the admin (me) an email stating that a user has just added a new forecast..
-                    String to = "stephen.weber3@gmail.com";
-                    String from = user.getEmail();
+                    String to = "sweber19@uncc.edu";
+                    String from = "";
+                    if(user != null){
+                        from = user.getEmail();
+                    }else{
+                        from = admin.getEmail();
+                    }
+                    
                     String subject = "A user has submitted a new forecast";
                     String body 
                             = "Hi, Stephen,<br/><br/>"+

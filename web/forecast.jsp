@@ -5,7 +5,7 @@
 --%>
 <%@include file="/header.jsp" %>
 <div class="grid-100">
-    <h3 class="center" id="multipleSubmission">${msg}</h3>
+    <p class="center" id="multipleSubmission">${msg}</p>
     <p>${errorMessage}</p>
     <form action="forecast" method="post" id="forecastForm">
         <input type="hidden" name="action" value="add">
@@ -17,7 +17,7 @@
         <input type="number" name="windSpd" min="0" max="50" required />
         <label>Sky Conditions</label>
         <select name="skyCond" required>
-            <option value=" " selected></option>
+            <option value="" selected>&nbsp;</option>
             <option value="Clear">Clear</option>
             <option value="Mostly Sunny">Mostly Sunny</option>
             <option value="Partly Cloudy">Partly Cloudy</option>
@@ -40,7 +40,7 @@
                 <iframe src="http://www.nws.noaa.gov/cgi-bin/mos/getmet.pl?sta=KCLT"></iframe>
             </div>
         </div>
-    <div>
+    </div>
 </div>
 
 <%@include file="/footer.jsp" %>
