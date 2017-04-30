@@ -5,8 +5,8 @@
 --%>
 <%@include file="/header.jsp" %>
 <div class="grid-100">
-    <p class="center" id="multipleSubmission">${msg}</p>
-    <p>${errorMessage}</p>
+    <p class="center" id="multipleSubmission"><c:out value='${msg}'/></p>
+    <p><c:out value='${errorMessage}'/></p>
     <form action="forecast" method="post" id="forecastForm">
         <input type="hidden" name="action" value="add">
         <label>High (F)</label>

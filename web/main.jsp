@@ -9,10 +9,10 @@
     <div id="mainTop">
         <c:choose>
             <c:when test="${sessionScope.theAdmin != null}">
-               <h2 class="center">Welcome, <span>${sessionScope.theAdmin.firstName}</span></h2>
+               <h2 class="center">Welcome, <span><c:out value='${sessionScope.theAdmin.firstName}'/></span></h2>
             </c:when>
             <c:otherwise>
-                <h2 class="center">Welcome, <span>${sessionScope.theUser.firstName}</span></h2>
+                <h2 class="center">Welcome, <span><c:out value='${sessionScope.theUser.firstName}'/></span></h2>
             </c:otherwise>
         </c:choose>
     </div>
