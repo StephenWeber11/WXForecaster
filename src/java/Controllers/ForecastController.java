@@ -114,6 +114,7 @@ public class ForecastController extends HttpServlet {
                             submittedToday = true;
                         }
                     }
+                    url="/forecast.jsp";
                     request.setAttribute("msg",msg);
                 }
                 
@@ -159,10 +160,9 @@ public class ForecastController extends HttpServlet {
                                 + "Check Tomcat logs for details. <br/> ";
                         request.setAttribute("errorMessage",errorMessage);
                     }
-                }
-
-                url="/thank-you.jsp";
+                    url="/thank-you.jsp";
                 
+                }
                 
             }
             

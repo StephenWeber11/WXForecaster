@@ -42,6 +42,9 @@
                                     <li><a href="user?action=logout">Log Out</a></li>
                                 </c:otherwise>
                             </c:choose>
+                            <c:if test="${sessionScope.theAdmin == null && sessionScope.theUser == null}">
+                                <li><a href="/signup.jsp">Sign Up</a></li>
+                            </c:if>
                             <c:if test="${sessionScope.theAdmin != null}">
                                 <li><a href="forecast?action=admin">Admin</a></li>  
                             </c:if>

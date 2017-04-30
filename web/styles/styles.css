@@ -231,3 +231,17 @@ table tr th {
     color: black;
     font-family: verdana;
 }
+
+.referenceRight{
+    float: right;
+    font-size: 10px;
+}
+
+#forecastSideBar iframe{
+    height: 210px !important;
+}
+
+#multipleSubmission{
+    color: red !important;
+    margin-top: 25px;
+}

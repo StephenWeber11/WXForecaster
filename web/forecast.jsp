@@ -5,7 +5,7 @@
 --%>
 <%@include file="/header.jsp" %>
 <div class="grid-100">
-    <p>${msg}</p>
+    <h3 class="center" id="multipleSubmission">${msg}</h3>
     <p>${errorMessage}</p>
     <form action="forecast" method="post" id="forecastForm">
         <input type="hidden" name="action" value="add">

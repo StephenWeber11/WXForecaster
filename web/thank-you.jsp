@@ -6,13 +6,14 @@
 
 <%@include file="header.jsp" %>
 
-<div>
-    <h2>Thank you for submitting a forecast!</h2>
-    <p>Our administrators will be examining your forecast to check for validity and legitimacy,<br/>
-        when approved, it will appear on the <a href="/WxForecaster/forecast?action=view-foreasts">View Forecasts</a> page.<br/><br/>
-        Thanks again!!</p>
-    
-    
+<div class="grid-100">
+    <div class="center">
+        <h2>Thank you for submitting a forecast!</h2>
+        <br/><br/>
+        <p>Our administrators will be examining your forecast to check for validity and legitimacy,<br/>
+            when approved, it will appear on the <a href="/WxForecaster/view-forecasts.jsp">View Forecasts</a> page.<br/><br/>
+            Thanks again!!</p>
+    </div>
 </div>
 
 
