@@ -6,11 +6,11 @@
 
 <%@include file="header.jsp" %>
 
-<div>
-    <h2>Your email has been sent!</h2>
-    <p>Please click here to return <a href="/WxForecaster/forecast?action=view-forecasts">View Forecasts</a></p>
-    
-    
+<div class="grid-100">
+    <div class="center">
+        <h2>Your email has been sent!</h2>
+        <p>Please click here to return <a href="/forecast?action=view-forecasts">View Forecasts</a></p>
+    </div>
 </div>
 
 

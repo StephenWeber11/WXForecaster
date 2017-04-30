@@ -11,7 +11,7 @@
         <h2>Thank you for submitting a forecast!</h2>
         <br/><br/>
         <p>Our administrators will be examining your forecast to check for validity and legitimacy,<br/>
-            when approved, it will appear on the <a href="/WxForecaster/forecast?action=view-forecasts">View Forecasts</a> page.<br/><br/>
+            when approved, it will appear on the <a href="/forecast?action=view-forecasts">View Forecasts</a> page.<br/><br/>
             Thanks again!!</p>
     </div>
 </div>
