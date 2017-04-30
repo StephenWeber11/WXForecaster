@@ -7,7 +7,7 @@
 <%@include file="/header.jsp"%>
 <div id="signUpForm">
     <p>${message}</p>
-    <p>${msg}</p>
+    <p>${passMsg}</p>
     <br/>
     <h2 id="registerAccount">Create an account</h2>
     <form action="user" method="post">
