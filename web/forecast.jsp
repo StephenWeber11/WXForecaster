@@ -18,7 +18,7 @@
         <label>Sky Conditions</label>
         <select name="skyCond" required>
             <option value=" " selected></option>
-            <option value="clear">Clear</option>
+            <option value="Clear">Clear</option>
             <option value="Mostly Sunny">Mostly Sunny</option>
             <option value="Partly Cloudy">Partly Cloudy</option>
             <option value="Mostly Cloudy">Mostly Cloudy</option>
@@ -26,7 +26,7 @@
             <option value="Fair">Fair</option>
         </select>
         <label>Precipitation (Inches)</label>
-        <input type="number" name="precip" min="0" max="5" step="0.01" requierd />
+        <input type="number" name="precip" min="0" max="5" step="0.01" required />
         <button type="submit">Submit</button>
     </form>
     <div class="grid-100">

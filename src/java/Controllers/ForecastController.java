@@ -54,19 +54,6 @@ public class ForecastController extends HttpServlet {
             url = "/home.jsp";
         }
         
-        
-        /*      Handle admin redirect and population of data        */
-        if(admin != null){
-            List<Forecast> forecasts = ForecastDB.getForecasts();
-                List<Forecast> submittedForecasts = new ArrayList<Forecast>();
-                for(Forecast f : forecasts){
-                    if(f.getStatus().equals("Pending")){
-                        submittedForecasts.add(f);
-                    }
-                }
-                request.setAttribute("submittedForecasts",submittedForecasts);
-        }
-        
         if(action.equals("add")){
             String msg = "";
             Forecast forecast = new Forecast();
@@ -169,7 +156,6 @@ public class ForecastController extends HttpServlet {
         }
         
         if(action.equals("view-forecasts")){
-            url = "/main.jsp";
             Date date = new Date();
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
