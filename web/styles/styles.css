@@ -203,13 +203,15 @@ table tr th {
     padding: 14px;
     margin: 0 auto;
     border-radius: 4px;
-    overflow: hidden;  
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #registerAccount{
     font-size: 20px;
     font-weight: normal;
-    color: #777;
+    color: white;
     padding-bottom: 10px;
 }
 
@@ -244,4 +246,7 @@ table tr th {
 #multipleSubmission{
     color: red !important;
     margin-top: 25px;
+}
+#login_button{
+    margin-top: 5px;
 }

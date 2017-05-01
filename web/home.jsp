@@ -33,10 +33,8 @@
                 <br/>
                 <form action="user" method="post">
                     <input type="hidden" name="action" value="login">
-                    <label >Email Address *</label>
-                    <input type="email" name="email" class="registerFormInput" required/>
-                    <label >Password *</label>
-                    <input type="password" name="password" class="registerFormInput" required/><br>
+                    <input type="email" name="email" class="registerFormInput" placeholder="Email Address*" required/>
+                    <input type="password" name="password" class="registerFormInput" placeholder="Password*" required/><br>
                     <input type="submit" value="Log in" id="login_button">
                     <br>
                 </form>
