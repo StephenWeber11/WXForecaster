@@ -137,6 +137,7 @@ public class UserController extends HttpServlet {
             session.setAttribute("msg",msg);
         }
         
+        //Destroy EVERYTHING when the user logs out
         if(action.equals("logout")){
             url = "/home.jsp";
             if(user != null){

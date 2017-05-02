@@ -105,6 +105,7 @@ public class UserDB {
         return u != null;
     }
     
+    //From textbook
     public static boolean passwordIsValid(String email,String userPass){
         User u = getUser(email);
         String password = u.getPassword();

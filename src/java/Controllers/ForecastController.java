@@ -35,17 +35,17 @@ public class ForecastController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        /*          Important things            */
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         User user = new User();
         User admin = new User();
         user = (User) session.getAttribute("theUser");
         admin = (User) session.getAttribute("theAdmin");
-        
         final String ADMIN_EMAIL = "sweber19@uncc.edu";
-        
         String url = "/home.jsp";
         
+        //Set default action
         if(action == null){
             action = "join";
             url="/main.jsp";
@@ -54,6 +54,7 @@ public class ForecastController extends HttpServlet {
             url = "/home.jsp";
         }
         
+        //Control addition of forecasts
         if(action.equals("add")){
             String msg = "";
             Forecast forecast = new Forecast();
@@ -70,12 +71,14 @@ public class ForecastController extends HttpServlet {
                 forecast.setSkyConditions(sky);
                 forecast.setPrecip(precip);
                 
+                //Determine if the user is admin or regular
                 if(user != null){
                     forecast.setForecasterEmail(user.getEmail());
                 }else{
                     forecast.setForecasterEmail(admin.getEmail());
                 }
                 
+                //Set the status to pending by default
                 forecast.setStatus("Pending");
                 
                 Date date = new Date();
@@ -110,6 +113,10 @@ public class ForecastController extends HttpServlet {
                     forecasts = ForecastDB.getForecasts(admin.getEmail());
                 }
                 
+                /*
+                    Check to see if the user has already submitted a forecast today
+                    if they have, direct them back to the forecast page and display error
+                */
                 boolean submittedToday = false;
                 if(forecasts != null){
                     for(Forecast f : forecasts){
@@ -123,6 +130,7 @@ public class ForecastController extends HttpServlet {
                     request.setAttribute("msg",msg);
                 }
                 
+                //If the user has not submitted a forecast continue..
                 if(!submittedToday){
                     ForecastDB.insert(forecast);
                 
@@ -135,6 +143,7 @@ public class ForecastController extends HttpServlet {
                         from = admin.getEmail();
                     }
                     
+                    //Send email to admin stating that there has been a new submission
                     String subject = "A user has submitted a new forecast";
                     String body 
                             = "Hi, Stephen,<br/><br/>"+
@@ -179,6 +188,7 @@ public class ForecastController extends HttpServlet {
             
         }
         
+        //Handle data population on view forecasts page
         if(action.equals("view-forecasts")){
             Date date = new Date();
             Calendar cal = Calendar.getInstance();
@@ -200,6 +210,7 @@ public class ForecastController extends HttpServlet {
             url="/view-forecasts.jsp";
         }
         
+        //Handle Email a Friend feature
         if(action.equals("email")){
             String toAddr = request.getParameter("toAddr");
             String forecastID = request.getParameter("forecastID");
@@ -242,6 +253,7 @@ public class ForecastController extends HttpServlet {
             url="/thank-you-email.jsp";
         }
         
+        //Handle admin functionality
         if(action.equals("admin")){
             List<Forecast> forecasts = ForecastDB.getForecasts();
             List<Forecast> submittedForecasts = new ArrayList<Forecast>();
@@ -254,6 +266,7 @@ public class ForecastController extends HttpServlet {
             url="/admin.jsp";
         }
         
+        //Handle approve
         if(action.equals("approve")){
             url = "/main.jsp";
             String forecastID = request.getParameter("forecastID");
@@ -302,6 +315,7 @@ public class ForecastController extends HttpServlet {
             
         }
         
+        //Handle forecast rejection
        if(action.equals("disapprove")){
             url = "/main.jsp";
             String forecastID = request.getParameter("forecastID");
