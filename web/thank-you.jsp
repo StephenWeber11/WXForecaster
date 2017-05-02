@@ -6,7 +6,7 @@
 
 <%@include file="header.jsp" %>
 
-<div class="grid-100">
+<div class="grid-100" id="twentyfive">
     <div class="center">
         <h2>Thank you for submitting a forecast!</h2>
         <br/><br/>
