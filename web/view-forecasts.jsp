@@ -12,6 +12,7 @@
         <h2 class="center">24 Hour forecast for Charlotte, North Carolina beginning at 12:00 AM EDT tomorrow </h2>
         <table>
             <tr>
+                <th>Submitter</th>
                 <th>High Temperature (F)</th>
                 <th>Low Temperature (F)</th>
                 <th>Wind Speed (MPH)</th>
@@ -23,6 +24,7 @@
             </tr>
             <c:forEach items="${approvedForecasts}" var="f">
                 <tr>
+                    <td><c:out value="${f.forecasterEmail}"/></td>
                     <td><c:out value="${f.highTemp}"/></td>
                     <td><c:out value="${f.lowTemp}"/></td>
                     <td><c:out value="${f.windSpeed}"/></td>

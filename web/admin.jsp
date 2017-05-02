@@ -12,6 +12,7 @@
         </p>
         <table>
             <tr>
+                <th>Submitter</th>
                 <th>High Temperature (F)</th>
                 <th>Low Temperature (F)</th>
                 <th>Wind Speed (MPH)</th>
@@ -20,6 +21,7 @@
             </tr>
             <c:forEach items="${submittedForecasts}" var="f">
                 <tr>
+                    <td><c:out value="${f.forecasterEmail}"/></td>
                     <td><c:out value="${f.highTemp}"/></td>
                     <td><c:out value="${f.lowTemp}"/></td>
                     <td><c:out value="${f.windSpeed}"/></td>
