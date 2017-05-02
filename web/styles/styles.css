@@ -250,3 +250,17 @@ table tr th {
 #login_button{
     margin-top: 5px;
 }
+
+#italics{
+    font-style: italic;
+}
+
+.large_quote{
+    font-style: normal !important;
+    font-size: 30px;
+}
+
+#large_source{
+    font-weight: bold;
+    font-size: 10px;
+}
